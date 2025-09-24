@@ -1,0 +1,18 @@
+apiVersion: databases.dataservices.vmware.com/v1alpha1
+kind: PostgresCluster
+spec:
+  adminUsername: pgadmin
+  databaseName: pais-db
+  version: '16'
+  storageSpace: 60Gi
+  storagePolicyName: legal-storage-policy
+  infrastructurePolicy:
+    name: oversight-kny28
+  replicas: 0
+  vmClass:
+    name: best-effort-large
+  adminPasswordRef:
+    name: secret-1758288203228
+metadata:
+  name: pais-db
+  namespace: oversight-kny28
