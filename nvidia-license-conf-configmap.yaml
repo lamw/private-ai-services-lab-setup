@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+ name: licensing-config
+data:
+ client_configuration_token.tok: ""
+ gridd.conf: ""

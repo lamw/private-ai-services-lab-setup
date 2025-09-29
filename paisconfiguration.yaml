@@ -1,0 +1,48 @@
+apiVersion: pais.vmware.com/v1alpha1
+kind: PAISConfiguration
+metadata:
+  name: default
+spec:
+  worker:
+    storageClassName: legal-storage-policy
+  clientTls:
+    caBundleRefs:
+      - name: ca-trust-bundle-for-harbor
+      - name: ca-trust-bundle-for-dsm
+      - name: ca-trust-bundle-for-oidc
+  database:
+    host: 31.32.0.2
+    username: pgadmin
+    dbname: pais-db
+    passwordRef:
+      name: postgres-credentials
+      fieldPath: password
+  auth:
+    oidc:
+      issuerUrl: https://auth2.vcf.lab/application/o/pais/
+      clientId: 2jgGwTq5PMqIcoH6YuAhOEdXf1vu0I1xfyHiltfU
+      scope:
+        - openid
+        - groups
+        - offline_access
+      authorizedGroups:
+        - pais-users
+  nvidiaConfig:
+    licenseConfigRef:
+      name: licensing-config
+    imagePullSecretRef:
+      name: ngc-pull-secret
+    gpuOperatorOverridesRef:
+      name: gpu-operator-overrides
+  ingress:
+    serviceType: LoadBalancer
+  vksControlPlane:
+    virtualMachineClassName: best-effort-xlarge
+    storageClassName: pais-storage-policy
+  runtimeConfig:
+    indexingWorkersRuntimeConfig:
+      deployment:
+        replicas: 1
+      workerRateLimit: 100/s
+      workerThreads: 10
+    logVerbosity: Debug
