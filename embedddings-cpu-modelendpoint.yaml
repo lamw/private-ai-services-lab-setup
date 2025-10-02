@@ -1,0 +1,18 @@
+apiVersion: pais.vmware.com/v1alpha1
+kind: ModelEndpoint
+metadata:
+  annotations:
+    pais.vmware.com/displayName: baai/bge-small-en
+  name: baai-bge-small-en
+spec:
+  engine: Infinity
+  model:
+    ociRef: registry.vcf.lab/models/baai/bge-small-en-v1.5:v5
+    pullSecrets:
+      - name: pais-pais-reg-creds-f0f2bc6f-cacd-4047-84aa-ac310f35c3a0
+  replicas: 1
+  routingName: baai/bge-small-en
+  storageClassName: legal-storage-policy
+  type: Embeddings
+  virtualMachineClassName: best-effort-large
+

@@ -1,0 +1,19 @@
+apiVersion: pais.vmware.com/v1alpha1
+kind: ModelEndpoint
+spec:
+  model:
+    ociRef: registry.vcf.lab/models/tinyllama/tinyllama-1.1b-chat-v1.0:v1
+    pullSecrets:
+      - name: pais-pais-reg-creds-bcced205-a05e-4af1-bd6a-a718543b2cbb
+  routingName: tinyllama/tinyllama
+  type: Completions
+  engine: vLLM
+  virtualMachineClassName: pais-gpu
+  storageClassName: legal-storage-policy
+  podResourceOverrides:
+    nvidia.com/gpu: "1"
+metadata:
+  name: tinyllama-tinyllama
+  namespace: oversight-kny28
+  annotations:
+    pais.vmware.com/displayName: tinyllama/tinyllama
